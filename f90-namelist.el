@@ -23,7 +23,7 @@
   :group 'f90-namelist)
 (put 'f90-nml-endreg 'safe-local-variable 'stringp)
 
-(defun inside-nml ()
+(defun f90-inside-nml ()
   "Returns t if currently inside a namelist and nil if not"
   (interactive)
   (setq st (save-excursion (re-search-backward f90-nml-startreg 0 t)))
@@ -34,10 +34,10 @@
     (setq en 0))
   ( > st en))
 
-(defun insert-f90-namelist-safe ()
+(defun f90-insert-namelist-safe ()
   "Insert a new f90 namelist"
   (interactive "")
-  (if (inside-nml)
+  (if (f90-inside-nml)
       (message "Inside a namelist!")
     (setq nml-name (read-from-minibuffer "Namelist name:"))
     (insert (format "\n&%s" nml-name))
