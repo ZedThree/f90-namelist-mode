@@ -34,17 +34,17 @@
     (setq en 0))
   ( > st en))
 
-(defun f90-insert-namelist-safe ()
-  "Insert a new f90 namelist"
-  (interactive "")
-  (if (f90-inside-nml)
-      (message "Inside a namelist!")
-    (setq nml-name (read-from-minibuffer "Namelist name:"))
-    (insert (format "\n&%s" nml-name))
-    (if f90-auto-keyword-case
-	(funcall f90-auto-keyword-case -1))
-    (insert "\n\n/")
-    (previous-line)))
+(defun f90-insert-namelist-safe (nml-name)
+  "Insert a new f90 namelist. If point is inside a namelist, then
+insert the new one after"
+  (interactive "sNamelist name: ")
+  (when (f90-inside-nml)
+      (f90-next-namelist))
+  (insert (format "\n&%s" nml-name))
+  (if f90-auto-keyword-case
+      (funcall f90-auto-keyword-case -1))
+  (insert "\n\n/\n")
+  (forward-line -2))
 
 (defun f90-next-namelist ()
   "Find the next namelist"
