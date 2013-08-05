@@ -4,11 +4,17 @@
 ;; D. Dickinson and P. Hill
 ;; 2013
 
+;;Define local variables
+;;-->Namelist start regexp, note we only match namelists with a name
+(set (make-local-variable 'f90-nml-startreg) "^ *&[a-zA-Z1-9_]+")
+;;-->Namelist end regexp
+(set (make-local-variable 'f90-nml-endreg) "^ */")
+
 (defun inside-nml ()
   "Returns t if currently inside a namelist and nil if not"
   (interactive)
-  (setq st (save-excursion (re-search-backward "&" 0 t)))
-  (setq en (save-excursion (re-search-backward "/" 0 t)))
+  (setq st (save-excursion (re-search-backward f90-nml-startreg 0 t)))
+  (setq en (save-excursion (re-search-backward f90-nml-endreg 0 t)))
   (when (not st)
     (setq st 0))
   (when (not en)
@@ -26,3 +32,4 @@
 	(funcall f90-auto-keyword-case -1))
     (insert "\n\n/")
     (previous-line)))
+
