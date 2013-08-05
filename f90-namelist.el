@@ -22,6 +22,7 @@
       (message "Inside a namelist!")
     (setq nml-name (read-from-minibuffer "Namelist name:"))
     (insert (format "\n&%s" nml-name))
-    (funcall f90-auto-keyword-case -1)
+    (if f90-auto-keyword-case
+	(funcall f90-auto-keyword-case -1))
     (insert "\n\n/")
     (previous-line)))
