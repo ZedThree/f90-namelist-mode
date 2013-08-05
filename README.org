@@ -1,0 +1,18 @@
+* f90-namelist
+
+An extension to emacs f90-mode to handle Fortran namelists
+
+* Installation
+
+Need to work out how to do this...
+
+
+* Planned features
+
+** TODO 1. Extend the comment regexp to include #
+** TODO 2. Define indentation rules for:
+ - Comment only lines
+ - Namelist start/end
+ - Key-value line
+** TODO 3. Add functions to create/find the next/previous namelist/key/value and map them to appropriate keys.
+** TODO 4. Add function to align on regexp (and auto run it?)
