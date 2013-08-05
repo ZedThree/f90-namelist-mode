@@ -9,6 +9,10 @@
   (interactive)
   (setq st (save-excursion (re-search-backward "&" 0 t)))
   (setq en (save-excursion (re-search-backward "/" 0 t)))
+  (when (not st)
+    (setq st 0))
+  (when (not en)
+    (setq en 0))
   ( > st en))
 
 (defun insert-f90-namelist-safe ()
