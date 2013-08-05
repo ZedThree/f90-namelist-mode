@@ -4,8 +4,59 @@
 ;; D. Dickinson and P. Hill
 ;; 2013
 
-;; User options
+;;Basics for setting up a mode
+(defvar f90-nml-mode-hook nil)
 
+(defvar f90-nml-mode-map
+  (let ((map (make-keymap)))
+    (define-key map "\C-j" 'newline-and-indent)
+    map)
+  "Keymap for f90-nml major mode")
+
+
+;Basic keywords to highlight
+(defconst f90-nml-font-lock-keywords-1
+  (list
+   '(f90-nml-startreg . font-lock-builtin-face)
+   '("\\('\\w*'\\)" . font-lock-variable-name-face))
+  "Minimal highlighting expressions for f90-nml mode")
+
+;More highlighting
+(defconst f90-nml-font-lock-keywords-2
+  (append f90-nml-font-lock-keywords-1
+	  (list   '(f90-nml-endreg. font-lock-keyword-face)
+		     '("=" . font-lock-constant-face)))
+  "Additional Keywords to highlight in f90-nml mode")
+
+;Most highlighting
+(defconst f90-nml-font-lock-keywords-3
+  (append f90-nml-font-lock-keywords-2
+	  (list   '("!|#" . font-lock-constant-face)))
+  "Highest highlighting level in f90-nml mode")
+
+;;Put the highlighting keywords into a standard var
+(defvar f90-nml-font-lock-keywords f90-nml-font-lock-keywords-3
+  "Default highlighting expressions for f90-nml mode")
+
+;;Define a function to indent lines, just use the f90-mode
+;;function for now
+(defun f90-nml-indent-line ()
+  "Indent current line as f90-nml line"
+  (interactive)
+  (beginning-of-line)
+  (f90-indent-line)
+  )
+
+;;This is actually the mode definition, note we derive it from f90-mode
+(define-derived-mode f90-nml-mode f90-mode "f90-nml"
+  "Major mode for editing Fortran namelist files"
+  (set (make-local-variable 'font-lock-defaults) '(f90-nml-font-lock-keywords))
+  (set (make-local-variable 'indent-line-function) 'f90-nml-indent-line))
+
+;;Now actually provide the mode
+(provide 'f90-nml-mode)
+
+;; User options
 (defgroup f90-namelist nil
   "An extension to f90-mode for Fortran namelists"
   :prefix "f90-"
