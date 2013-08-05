@@ -4,11 +4,24 @@
 ;; D. Dickinson and P. Hill
 ;; 2013
 
-;;Define local variables
-;;-->Namelist start regexp, note we only match namelists with a name
-(set (make-local-variable 'f90-nml-startreg) "^ *&[a-zA-Z1-9_]+")
-;;-->Namelist end regexp
-(set (make-local-variable 'f90-nml-endreg) "^ */")
+;; User options
+
+(defgroup f90-namelist nil
+  "An extension to f90-mode for Fortran namelists"
+  :prefix "f90-"
+  :group 'f90)
+
+(defcustom f90-nml-startreg "^ *&[a-zA-Z1-9_]+"
+  "Namelist start regexp, note we only match namelists with a name"
+  :type  'string
+  :group 'f90-namelist)
+(put 'f90-nml-startreg 'safe-local-variable 'stringp)
+
+(defcustom f90-nml-endreg "^ */"
+  "Namelist end regexp"
+  :type  'string
+  :group 'f90-namelist)
+(put 'f90-nml-endreg 'safe-local-variable 'stringp)
 
 (defun inside-nml ()
   "Returns t if currently inside a namelist and nil if not"
