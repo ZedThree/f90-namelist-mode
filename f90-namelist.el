@@ -46,3 +46,14 @@
     (insert "\n\n/")
     (previous-line)))
 
+(defun f90-next-namelist ()
+  "Find the next namelist"
+  (interactive)
+  (re-search-forward f90-nml-endreg))
+
+(defun f90-previous-namelist ()
+  "Find the next namelist"
+  (interactive)
+  (re-search-backward f90-nml-startreg))
+
+
