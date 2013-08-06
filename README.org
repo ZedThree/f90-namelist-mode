@@ -1,18 +1,29 @@
-* f90-namelist
+#+title: f90-namelist-mode
+#+options: toc:nil
+
+* f90-namelist-mode
 
 An extension to emacs f90-mode to handle Fortran namelists
 
 * Installation
 
-Need to work out how to do this...
+To install, put f90-namelist-mode.el somewhere in your emacs path, for example in =~/.emacs.d/f90-namelist-mode=, then put the following in your .emacs:
 
+#+BEGIN_SRC emacs-lisp
+  (add-to-list 'load-path "~/.emacs.d/f90-namelist-mode/")
+  (require 'f90-namelist-mode)
+#+END_SRC
+
+Fortran input files don't have a standard filename suffix, so you'll have to enable this mode manually with =M-x f90-namelist-mode=.
+
+Possible to do this with local variables... check this.
 
 * Planned features
 
-** TODO 1. Extend the comment regexp to include #
-** TODO 2. Define indentation rules for:
- - Comment only lines
- - Namelist start/end
- - Key-value line
-** TODO 3. Add functions to create/find the next/previous namelist/key/value and map them to appropriate keys.
-** TODO 4. Add function to align on regexp (and auto run it?)
+ 1. Extend the comment regexp to include #
+ 2. Define indentation rules for:
+    - Comment only lines
+    - Namelist start/end
+    - Key-value line
+ 3. Add functions to create/find the next/previous namelist/key/value and map them to appropriate keys.
+ 4. Add function to align on regexp (and auto run it?)
