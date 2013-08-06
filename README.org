@@ -14,16 +14,26 @@ To install, put f90-namelist-mode.el somewhere in your emacs path, for example i
   (require 'f90-namelist-mode)
 #+END_SRC
 
-Fortran input files don't have a standard filename suffix, so you'll have to enable this mode manually with =M-x f90-namelist-mode=.
+Fortran input files don't have a standard filename suffix, so you'll have to enable this mode manually with =M-x f90-namelist-mode=, or set a local variable. To do so, just put the following on the first line of your input file:
 
-Possible to do this with local variables... check this.
+#+BEGIN_SRC emacs-lisp
+  ! -*- mode: f90-namelist -*-
+#+END_SRC
+
+or at the end of your file:
+
+#+BEGIN_SRC emacs-lisp
+  ! Local Variables:
+  ! mode: f90-namelist
+  ! End:
+#+END_SRC
 
 * Planned features
 
- 1. Extend the comment regexp to include #
- 2. Define indentation rules for:
+1. Extend the comment regexp to include #
+2. Define indentation rules for:
     - Comment only lines
     - Namelist start/end
     - Key-value line
- 3. Add functions to create/find the next/previous namelist/key/value and map them to appropriate keys.
- 4. Add function to align on regexp (and auto run it?)
+3. Add functions to create/find the next/previous namelist/key/value and map them to appropriate keys.
+4. Add function to align on regexp (and auto run it?)
