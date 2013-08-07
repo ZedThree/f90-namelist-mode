@@ -28,6 +28,13 @@ or at the end of your file:
   ! End:
 #+END_SRC
 
+To automatically detect Fortran input files and load f90-namelist-mode, you can use the function =f90-buffer-is-input-file= by adding it to =magic-mode-alist= in your .emacs:
+
+#+BEGIN_SRC emacs-lisp
+  (add-to-list 'magic-mode-alist
+               '(f90-buffer-is-input-file . f90-namelist-mode))
+#+END_SRC
+
 * Planned features
 
 1. Extend the comment regexp to include #
@@ -37,3 +44,5 @@ or at the end of your file:
     - Key-value line
 3. Add functions to create/find the next/previous namelist/key/value and map them to appropriate keys.
 4. Add function to align on regexp (and auto run it?)
+
+

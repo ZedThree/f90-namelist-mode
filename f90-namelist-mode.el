@@ -107,4 +107,13 @@ insert the new one after"
   (interactive)
   (re-search-backward f90-namelist-startreg))
 
-
+(defun f90-buffer-is-input-file ()
+  "Determine if current buffer is a Fortran input file.
+If so, return true."
+  (interactive)
+  (save-excursion
+    (goto-char (point-min))
+    (setq noncomment-regexp "^ *[^!]")
+    (re-search-forward noncomment-regexp)
+    (beginning-of-line)
+    (looking-at (concat "\\(" f90-namelist-startreg "\\|" f90-namelist-endreg "\\)"))))
