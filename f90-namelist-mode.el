@@ -62,6 +62,18 @@
   :prefix "f90-"
   :group 'f90)
 
+(defcustom f90-comment-startreg "[!#]+"
+  "Regexp for start of a comment"
+  :type  'string
+  :group 'f90-namelist)
+(put 'f90-comment-startreg 'safe-local-variable 'stringp)
+
+(defcustom f90-comment-linereg (format "^ *%s" f90-comment-startreg)
+  "Regexp for a comment line"
+  :type  'string
+  :group 'f90-namelist)
+(put 'f90-comment-linereg 'safe-local-variable 'stringp)
+
 (defcustom f90-namelist-startreg "^ *&[a-zA-Z1-9_]+"
   "Namelist start regexp, note we only match namelists with a name"
   :type  'string
