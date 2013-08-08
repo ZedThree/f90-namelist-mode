@@ -129,3 +129,14 @@ If so, return true."
     (re-search-forward noncomment-regexp)
     (beginning-of-line)
     (looking-at (concat "\\(" f90-namelist-startreg "\\|" f90-namelist-endreg "\\)"))))
+
+(defun f90-namelist-insert-key-value (key value)
+  "Insert a new key-value pair."
+  (interactive "sKey: \nsValue: ")
+  (if (f90-inside-namelist)
+      (progn
+	(open-line 1)
+	(f90-namelist-indent-line)
+	(insert (format "%s = %s" key value)))
+    (message "Not inside a namelist!")))
+
