@@ -140,3 +140,36 @@ If so, return true."
 	(insert (format "%s = %s" key value)))
     (message "Not inside a namelist!")))
 
+(defun f90-namelist-next-key ()
+  "Find the next key."
+  (interactive)
+  ;; If point is currently on a key-value line, it may be on the wrong side
+  ;; of the equals sign, so we need to make sure we move past it to find the
+  ;; next key. If we don't find another key, don't move point
+  (save-excursion
+    (setq next-key (progn (end-of-line)
+			  (re-search-forward "=" (point-max) t))))
+  (when next-key (goto-char next-key))
+  (back-to-indentation))
+
+(defun f90-namelist-previous-key ()
+  "Find the previous key."
+  (interactive)
+  (re-search-backward "=" 0 t)
+  (back-to-indentation))
+
+(defun f90-namelist-next-value ()
+  "Find the next value."
+  (interactive)
+  (re-search-forward "=[[:space:]]*" (point-max) t))
+
+(defun f90-namelist-previous-value ()
+  "Find the previous value."
+  (interactive)
+  ;; If point is currently on a key-value line, it may be on the wrong side
+  ;; of the equals sign, so we need to make sure we move past it to find the
+  ;; next key. If we don't find another key, don't move point
+  (save-excursion
+    (setq prev-value (progn (beginning-of-line)
+			    (re-search-backward "=[[:space:]]*" 0 t))))
+  (when prev-value (goto-char (match-end 0))))
